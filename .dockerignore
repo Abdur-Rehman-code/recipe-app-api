@@ -1,0 +1,18 @@
+# this file allows you to specify list of files that will be exclude from docker context.
+# when u create image it uses docker context and install all files listed there except in dockerignore
+
+# Git (.git contain git history)
+.git 
+.gitignore
+
+# Docker
+.docker
+
+# Python
+app/__pycache__/
+app/*/__pycache__/
+app/*/*/__pycache__/
+app/*/*/*/__pycache__/
+.env/
+.venv/
+venv/

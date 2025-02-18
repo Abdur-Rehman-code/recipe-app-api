@@ -1,0 +1,23 @@
+
+# we will be running service
+  # The service name is app
+    # The app will build but where ?
+      # in the same directory
+    # Port: we will map our machine port to docker image port
+      # 8000 : 8000
+    # Volume:whatever code we will write in our machine app, that should be sync into the docker image and we dont to rebuild everytime.
+    # Command: if we dont specify any command, this command will be run to run service.
+
+services:
+  app:
+    build:
+      context: .
+      args:
+        - DEV=true
+    ports:
+      - "8000:8000" 
+    volumes:
+      - ./app:/app
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+ 
