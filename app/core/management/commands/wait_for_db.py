@@ -8,7 +8,7 @@ from psycopg2 import OperationalError as psycopg2Error
 
 from django.db.utils import OperationalError
 
-import time
+import time , os
 
 
 class Command(BaseCommand):
@@ -18,6 +18,9 @@ class Command(BaseCommand):
         """Entery point for command."""
 
         self.stdout.write('Waiting for database...')
+
+    
+        # print(f"HOST {os.environ.get('DB_HOST')} NAME {os.environ.get('DB_NAME')} USER {os.environ.get('DB_USER')} PASS {os.environ.get('DB_PASS')}")
 
         db_up = False
 
