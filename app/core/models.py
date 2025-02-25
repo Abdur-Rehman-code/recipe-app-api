@@ -4,16 +4,16 @@ Database Model
 
 from django.db import models
 from django.contrib.auth.models import (
-    AbstractBaseUser, #functionally for authetication
+    AbstractBaseUser,  # functionally for authetication
     BaseUserManager,
-    PermissionsMixin  #functionallity for permissions,fields
+    PermissionsMixin  # functionallity for permissions,fields
 )
 
 
 class UsersManager(BaseUserManager):
     """Manager for users"""
 
-    def create_user(self,email, password=None, **extra_field):
+    def create_user(self, email, password=None, **extra_field):
         """create, save and return new user"""
 
         if not email:
@@ -43,4 +43,4 @@ class User (AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     objects = UsersManager()
-    USERNAME_FIELD = 'email'  #field will be used for authenticaiton
+    USERNAME_FIELD = 'email'  # field will be used for authenticaiton
