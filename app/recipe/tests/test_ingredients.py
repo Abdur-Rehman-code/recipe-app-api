@@ -16,9 +16,10 @@ from recipe.serializers import IngredientSerializer
 INGREDIENTS_URL = reverse('recipe:ingredient-list')
 
 
-def create_user(email = 'user@example.com', password = 'testpass123'):
+def create_user(email='user@example.com', password='testpass123'):
     """Create a sample user"""
-    return get_user_model.objects.create_user(email=email, password=password)
+    return get_user_model().objects.create_user(email=email, password=password)
+
 
 class PublicIngredientsApiTests(TestCase):
     """Test unauthenticated API requests"""
@@ -43,8 +44,8 @@ class PrivateIngredientsApiTests(TestCase):
     def test_retrieve_ingredients_list(self):
         """Test retrieving a list of ingredients"""
 
-        ingredient1 = Ingredient.objects.create(user=self.user, name='Kale')
-        ingredient2 = Ingredient.objects.create(user=self.user, name='Salt')
+        Ingredient.objects.create(user=self.user, name='Kale')
+        Ingredient.objects.create(user=self.user, name='Salt')
 
         res = self.client.get(INGREDIENTS_URL)
 
@@ -57,7 +58,7 @@ class PrivateIngredientsApiTests(TestCase):
     def test_ingredients_limited_to_user(self):
         """Test list of ingredients is limited to authenticated user"""
 
-        user2 = create_user(email= 'user2@example.com')
+        user2 = create_user(email='user2@example.com')
         Ingredient.objects.create(user=user2, name='Vinegar')
         ingredient = Ingredient.objects.create(user=self.user, name='Tumeric')
 
